@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StackMaster - Master Your MERN Stack Interviews</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <i class="fas fa-code"></i>
+          <span>StackMaster</span>
+        </div>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#questions" class="nav-link">Questions</a></li>
+          <li><a href="#levels" class="nav-link">Levels</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">Master Your MERN Stack Interviews</h1>
+        <p class="hero-subtitle">
+          Comprehensive preparation platform for MongoDB, Express.js, React, and
+          Node.js developers
+        </p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="startPreparation()">
+            Start Preparation
+          </button>
+          <button
+            class="btn btn-secondary"
+            onclick="scrollToSection('features')"
+          >
+            Learn More
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="tech-stack">
+          <div class="tech-item mongodb">M</div>
+          <div class="tech-item express">E</div>
+          <div class="tech-item react">R</div>
+          <div class="tech-item node">N</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+      <div class="container">
+        <h2 class="section-title">Why Choose StackMaster?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-code-branch"></i>
+            <h3>Technical Questions</h3>
+            <p>
+              Comprehensive collection of MERN stack technical interview
+              questions with detailed explanations
+            </p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-users"></i>
+            <h3>HR Questions</h3>
+            <p>
+              Behavioral and HR interview questions to help you present yourself
+              professionally
+            </p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>All Levels</h3>
+            <p>
+              From entry-level to senior positions, we cover questions for every
+              experience level
+            </p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-laptop-code"></i>
+            <h3>Interactive Practice</h3>
+            <p>
+              Practice with interactive coding challenges and mock interview
+              scenarios
+            </p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-mobile-alt"></i>
+            <h3>Mobile Responsive</h3>
+            <p>
+              Study anywhere, anytime with our fully responsive design across
+              all devices
+            </p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-clock"></i>
+            <h3>Updated Content</h3>
+            <p>
+              Regularly updated questions based on current industry trends and
+              practices
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Question Categories -->
+    <section id="questions" class="question-categories">
+      <div class="container">
+        <h2 class="section-title">Question Categories</h2>
+        <div class="categories-grid">
+          <div class="category-card" onclick="openCategory('mongodb')">
+            <div class="category-icon mongodb-bg">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3>MongoDB</h3>
+            <p>
+              Database design, queries, aggregation, indexing, and performance
+              optimization
+            </p>
+            <span class="question-count">45+ Questions</span>
+          </div>
+          <div class="category-card" onclick="openCategory('express')">
+            <div class="category-icon express-bg">
+              <i class="fas fa-server"></i>
+            </div>
+            <h3>Express.js</h3>
+            <p>
+              Routing, middleware, authentication, error handling, and RESTful
+              APIs
+            </p>
+            <span class="question-count">38+ Questions</span>
+          </div>
+          <div class="category-card" onclick="openCategory('react')">
+            <div class="category-icon react-bg">
+              <i class="fab fa-react"></i>
+            </div>
+            <h3>React</h3>
+            <p>
+              Components, hooks, state management, lifecycle methods, and
+              performance
+            </p>
+            <span class="question-count">52+ Questions</span>
+          </div>
+          <div class="category-card" onclick="openCategory('nodejs')">
+            <div class="category-icon node-bg">
+              <i class="fab fa-node-js"></i>
+            </div>
+            <h3>Node.js</h3>
+            <p>
+              Event loop, streams, modules, security, and scalability concepts
+            </p>
+            <span class="question-count">41+ Questions</span>
+          </div>
+          <div class="category-card" onclick="openCategory('hr')">
+            <div class="category-icon hr-bg">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <h3>HR & Behavioral</h3>
+            <p>
+              Soft skills, team collaboration, problem-solving, and career
+              growth questions
+            </p>
+            <span class="question-count">30+ Questions</span>
+          </div>
+          <div class="category-card" onclick="openCategory('system')">
+            <div class="category-icon system-bg">
+              <i class="fas fa-sitemap"></i>
+            </div>
+            <h3>System Design</h3>
+            <p>
+              Architecture patterns, scalability, microservices, and system
+              planning
+            </p>
+            <span class="question-count">25+ Questions</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Levels -->
+    <section id="levels" class="levels">
+      <div class="container">
+        <h2 class="section-title">Choose Your Experience Level</h2>
+        <div class="levels-grid">
+          <div class="level-card entry" onclick="selectLevel('entry')">
+            <div class="level-icon">
+              <i class="fas fa-seedling"></i>
+            </div>
+            <h3>Entry Level</h3>
+            <p>0-2 years experience</p>
+            <ul>
+              <li>Basic MERN concepts</li>
+              <li>Fundamental programming</li>
+              <li>Simple project questions</li>
+              <li>Getting started tips</li>
+            </ul>
+            <button class="btn btn-outline">Start Journey</button>
+          </div>
+          <div
+            class="level-card intermediate"
+            onclick="selectLevel('intermediate')"
+          >
+            <div class="level-icon">
+              <i class="fas fa-tree"></i>
+            </div>
+            <h3>Intermediate</h3>
+            <p>2-5 years experience</p>
+            <ul>
+              <li>Advanced concepts</li>
+              <li>Performance optimization</li>
+              <li>Architecture decisions</li>
+              <li>Best practices</li>
+            </ul>
+            <button class="btn btn-outline">Level Up</button>
+          </div>
+          <div class="level-card senior" onclick="selectLevel('senior')">
+            <div class="level-icon">
+              <i class="fas fa-crown"></i>
+            </div>
+            <h3>Senior Level</h3>
+            <p>5+ years experience</p>
+            <ul>
+              <li>System design</li>
+              <li>Leadership questions</li>
+              <li>Complex problem solving</li>
+              <li>Technical mentoring</li>
+            </ul>
+            <button class="btn btn-outline">Master Level</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sample Questions -->
+    <section class="sample-questions">
+      <div class="container">
+        <h2 class="section-title">Sample Questions</h2>
+        <div class="question-showcase">
+          <div class="question-item active" data-category="react">
+            <div class="question-header">
+              <span class="question-category react-tag">React</span>
+              <span class="question-level">Intermediate</span>
+            </div>
+            <h3>
+              What is the difference between useState and useReducer hooks?
+            </h3>
+            <div class="question-preview">
+              <p>
+                <strong>Answer:</strong> useState is ideal for simple state
+                management, while useReducer is better for complex state
+                logic...
+              </p>
+              <button class="btn btn-small" onclick="viewFullAnswer('react-1')">
+                View Full Answer
+              </button>
+            </div>
+          </div>
+          <div class="question-item" data-category="nodejs">
+            <div class="question-header">
+              <span class="question-category node-tag">Node.js</span>
+              <span class="question-level">Advanced</span>
+            </div>
+            <h3>Explain the Event Loop in Node.js</h3>
+            <div class="question-preview">
+              <p>
+                <strong>Answer:</strong> The Event Loop is the core mechanism
+                that allows Node.js to perform non-blocking I/O operations...
+              </p>
+              <button class="btn btn-small" onclick="viewFullAnswer('node-1')">
+                View Full Answer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <div class="footer-logo">
+              <i class="fas fa-code"></i>
+              <span>StackMaster</span>
+            </div>
+            <p>
+              Empowering developers to ace their MERN stack interviews with
+              comprehensive preparation materials.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-discord"></i></a>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#questions">Question Bank</a></li>
+              <li><a href="#levels">Experience Levels</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#contact">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Technologies</h3>
+            <ul>
+              <li><a href="#mongodb">MongoDB</a></li>
+              <li><a href="#express">Express.js</a></li>
+              <li><a href="#react">React</a></li>
+              <li><a href="#nodejs">Node.js</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Support</h3>
+            <ul>
+              <li><a href="#faq">FAQ</a></li>
+              <li><a href="#help">Help Center</a></li>
+              <li><a href="#feedback">Feedback</a></li>
+              <li><a href="#contribute">Contribute</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2025 StackMaster. All rights reserved. Built with ❤️ for
+            developers by developers.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Question Modal -->
+    <div id="questionModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTitle">Question Details</h2>
+          <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-body" id="modalBody">
+          <!-- Question content will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
