@@ -1,251 +1,748 @@
-// DOM Elements
-const hamburger = document.getElementById("hamburger");
-const navMenu = document.getElementById("nav-menu");
-const modal = document.getElementById("questionModal");
-const modalTitle = document.getElementById("modalTitle");
-const modalBody = document.getElementById("modalBody");
-
-// Sample Question Data
+// Complete Question Database
 const questionsDB = {
-  "react-1": {
-    category: "React",
-    level: "Intermediate",
-    question: "What is the difference between useState and useReducer hooks?",
+  // MONGODB QUESTIONS
+  "mongodb-1": {
+    category: "MongoDB",
+    level: "Entry",
+    question: "What is MongoDB and what are its key features?",
     answer: `<strong>Answer:</strong>
         
-        <p><strong>useState</strong> and <strong>useReducer</strong> are both hooks for managing state in React, but they serve different purposes:</p>
+        <p><strong>MongoDB</strong> is a popular NoSQL document-oriented database that stores data in flexible, JSON-like documents called BSON (Binary JSON).</p>
+        
+        <h4>Key Features:</h4>
+        <ul>
+            <li><strong>Document-Based:</strong> Stores data in documents instead of rows and columns</li>
+            <li><strong>Schema Flexibility:</strong> No rigid schema, documents can have different structures</li>
+            <li><strong>Scalability:</strong> Horizontal scaling through sharding</li>
+            <li><strong>High Performance:</strong> Optimized for read and write operations</li>
+            <li><strong>Rich Query Language:</strong> Supports complex queries and aggregations</li>
+            <li><strong>Indexing:</strong> Support for various types of indexes</li>
+        </ul>
+        
+        <h4>Example Document:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+{<br>
+  "_id": ObjectId("..."),<br>
+  "name": "John Doe",<br>
+  "email": "john@example.com",<br>
+  "skills": ["JavaScript", "React", "Node.js"]<br>
+}
+            </code>
+        </div>`,
+  },
+
+  "mongodb-2": {
+    category: "MongoDB",
+    level: "Entry",
+    question: "What is the difference between SQL and NoSQL databases?",
+    answer: `<strong>Answer:</strong>
+        
+        <h4>SQL Databases (RDBMS):</h4>
+        <ul>
+            <li><strong>Structure:</strong> Table-based with rows and columns</li>
+            <li><strong>Schema:</strong> Fixed, predefined schema</li>
+            <li><strong>ACID:</strong> Strong ACID compliance</li>
+            <li><strong>Scaling:</strong> Vertical scaling (scale up)</li>
+            <li><strong>Query Language:</strong> Structured Query Language (SQL)</li>
+            <li><strong>Examples:</strong> MySQL, PostgreSQL, Oracle</li>
+        </ul>
+        
+        <h4>NoSQL Databases:</h4>
+        <ul>
+            <li><strong>Structure:</strong> Document, key-value, graph, or column-based</li>
+            <li><strong>Schema:</strong> Dynamic, flexible schema</li>
+            <li><strong>ACID:</strong> Eventually consistent (BASE)</li>
+            <li><strong>Scaling:</strong> Horizontal scaling (scale out)</li>
+            <li><strong>Query Language:</strong> Various query methods</li>
+            <li><strong>Examples:</strong> MongoDB, Redis, Cassandra, Neo4j</li>
+        </ul>`,
+  },
+
+  "mongodb-3": {
+    category: "MongoDB",
+    level: "Entry",
+    question: "Explain CRUD operations in MongoDB",
+    answer: `<strong>Answer:</strong>
+        
+        <p><strong>CRUD</strong> operations in MongoDB are Create, Read, Update, and Delete operations.</p>
+        
+        <h4>Create Operations:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+// Insert one document<br>
+db.users.insertOne({name: "John", age: 25});<br><br>
+
+// Insert multiple documents<br>
+db.users.insertMany([<br>
+  {name: "Alice", age: 30},<br>
+  {name: "Bob", age: 28}<br>
+]);
+            </code>
+        </div>
+        
+        <h4>Read Operations:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+// Find all documents<br>
+db.users.find();<br><br>
+
+// Find with conditions<br>
+db.users.find({age: {$gte: 25}});
+            </code>
+        </div>
+        
+        <h4>Update Operations:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+// Update one document<br>
+db.users.updateOne(<br>
+  {name: "John"},<br>
+  {$set: {age: 26}}<br>
+);
+            </code>
+        </div>
+        
+        <h4>Delete Operations:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+// Delete one document<br>
+db.users.deleteOne({name: "John"});
+            </code>
+        </div>`,
+  },
+
+  "mongodb-4": {
+    category: "MongoDB",
+    level: "Intermediate",
+    question: "What is MongoDB Aggregation Pipeline?",
+    answer: `<strong>Answer:</strong>
+        
+        <p>The <strong>Aggregation Pipeline</strong> is a framework for data aggregation that processes data through a sequence of stages.</p>
+        
+        <h4>Common Pipeline Stages:</h4>
+        
+        <h5>1. $match - Filter documents:</h5>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>{ $match: { status: "active", age: { $gte: 18 } } }</code>
+        </div>
+        
+        <h5>2. $group - Group and aggregate:</h5>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>{ $group: { _id: "$category", total: { $sum: "$amount" } } }</code>
+        </div>
+        
+        <h4>Complete Example:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+db.orders.aggregate([<br>
+  { $match: { status: "completed" } },<br>
+  { $group: { _id: "$customerId", total: { $sum: "$amount" } } },<br>
+  { $sort: { total: -1 } }<br>
+])
+            </code>
+        </div>`,
+  },
+
+  // EXPRESS QUESTIONS
+  "express-1": {
+    category: "Express",
+    level: "Entry",
+    question: "What is Express.js and what are its main features?",
+    answer: `<strong>Answer:</strong>
+        
+        <p><strong>Express.js</strong> is a minimal and flexible Node.js web application framework.</p>
+        
+        <h4>Main Features:</h4>
+        <ul>
+            <li><strong>Routing:</strong> Define routes for different HTTP methods</li>
+            <li><strong>Middleware:</strong> Functions that execute during request-response cycle</li>
+            <li><strong>Template Engines:</strong> Support for EJS, Pug, Handlebars</li>
+            <li><strong>Static Files:</strong> Serve CSS, JS, images</li>
+            <li><strong>Error Handling:</strong> Built-in error handling</li>
+        </ul>
+        
+        <h4>Basic Express Server:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+const express = require('express');<br>
+const app = express();<br><br>
+
+app.get('/', (req, res) => {<br>
+  res.send('Hello World!');<br>
+});<br><br>
+
+app.listen(3000);
+            </code>
+        </div>`,
+  },
+
+  "express-2": {
+    category: "Express",
+    level: "Intermediate",
+    question: "What is middleware in Express.js?",
+    answer: `<strong>Answer:</strong>
+        
+        <p><strong>Middleware</strong> functions execute during the request-response cycle.</p>
+        
+        <h4>Application-level middleware:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+app.use((req, res, next) => {<br>
+  console.log('Time:', Date.now());<br>
+  next();<br>
+});
+            </code>
+        </div>
+        
+        <h4>Built-in middleware:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+app.use(express.json());<br>
+app.use(express.static('public'));
+            </code>
+        </div>`,
+  },
+
+  "express-3": {
+    category: "Express",
+    level: "Intermediate",
+    question: "How do you handle error handling in Express.js?",
+    answer: `<strong>Answer:</strong>
+        
+        <p><strong>Error handling</strong> in Express involves catching and processing errors.</p>
+        
+        <h4>Basic Error Handling:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+app.use((err, req, res, next) => {<br>
+  console.error(err.stack);<br>
+  res.status(500).send('Something broke!');<br>
+});
+            </code>
+        </div>
+        
+        <h4>Custom Error Handler:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+const errorHandler = (err, req, res, next) => {<br>
+  const statusCode = err.status || 500;<br>
+  res.status(statusCode).json({<br>
+    error: {<br>
+      message: err.message,<br>
+      status: statusCode<br>
+    }<br>
+  });<br>
+};
+            </code>
+        </div>`,
+  },
+
+  // REACT QUESTIONS
+  "react-1": {
+    category: "React",
+    level: "Entry",
+    question: "What is React and what are its key features?",
+    answer: `<strong>Answer:</strong>
+        
+        <p><strong>React</strong> is a JavaScript library for building user interfaces.</p>
+        
+        <h4>Key Features:</h4>
+        <ul>
+            <li><strong>Component-Based:</strong> Reusable UI components</li>
+            <li><strong>Virtual DOM:</strong> Efficient rendering</li>
+            <li><strong>JSX:</strong> JavaScript syntax extension</li>
+            <li><strong>One-Way Data Flow:</strong> Predictable data flow</li>
+            <li><strong>Hooks:</strong> State and lifecycle in functional components</li>
+        </ul>
+        
+        <h4>Simple Component:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+function Welcome(props) {<br>
+  return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;<br>
+}
+            </code>
+        </div>`,
+  },
+
+  "react-2": {
+    category: "React",
+    level: "Entry",
+    question: "What is JSX and how does it work?",
+    answer: `<strong>Answer:</strong>
+        
+        <p><strong>JSX</strong> (JavaScript XML) allows you to write HTML-like code within JavaScript.</p>
+        
+        <h4>JSX Benefits:</h4>
+        <ul>
+            <li><strong>Readable:</strong> More intuitive than React.createElement()</li>
+            <li><strong>Familiar:</strong> Similar to HTML syntax</li>
+            <li><strong>Powerful:</strong> Full power of JavaScript expressions</li>
+        </ul>
+        
+        <h4>JSX Examples:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+const name = 'John';<br>
+const element = &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;<br><br>
+
+const element = &lt;img src={user.avatarUrl} alt={user.name} /&gt;;
+            </code>
+        </div>`,
+  },
+
+  "react-3": {
+    category: "React",
+    level: "Intermediate",
+    question: "What is the difference between useState and useReducer?",
+    answer: `<strong>Answer:</strong>
         
         <h4>useState:</h4>
         <ul>
             <li>Best for simple state management</li>
-            <li>State updates are straightforward</li>
-            <li>Ideal for independent state variables</li>
+            <li>Straightforward state updates</li>
             <li>Less boilerplate code</li>
         </ul>
         
         <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
             <code>
-const [count, setCount] = useState(0);<br>
-setCount(count + 1);
+const [count, setCount] = useState(0);
             </code>
         </div>
         
         <h4>useReducer:</h4>
         <ul>
             <li>Better for complex state logic</li>
-            <li>Multiple sub-values or state transitions</li>
-            <li>When next state depends on the previous one</li>
-            <li>Similar to Redux pattern</li>
+            <li>Multiple related state variables</li>
+            <li>Redux-like pattern</li>
         </ul>
         
         <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
             <code>
-const [state, dispatch] = useReducer(reducer, initialState);<br>
-dispatch({ type: 'INCREMENT', payload: 1 });
+const [state, dispatch] = useReducer(reducer, initialState);
+            </code>
+        </div>`,
+  },
+
+  "react-4": {
+    category: "React",
+    level: "Intermediate",
+    question: "What is React Context API and when should you use it?",
+    answer: `<strong>Answer:</strong>
+        
+        <p><strong>React Context API</strong> provides a way to pass data through the component tree without prop drilling.</p>
+        
+        <h4>When to Use Context:</h4>
+        <ul>
+            <li>Global state (authentication, theme, language)</li>
+            <li>Avoiding prop drilling</li>
+            <li>Sharing data between distant components</li>
+        </ul>
+        
+        <h4>Creating Context:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+const ThemeContext = React.createContext();<br><br>
+
+function ThemeProvider({ children }) {<br>
+  const [theme, setTheme] = useState('light');<br>
+  return (<br>
+    &lt;ThemeContext.Provider value={{theme, setTheme}}&gt;<br>
+      {children}<br>
+    &lt;/ThemeContext.Provider&gt;<br>
+  );<br>
+}
+            </code>
+        </div>`,
+  },
+
+  // NODE.JS QUESTIONS
+  "nodejs-1": {
+    category: "Node.js",
+    level: "Entry",
+    question: "What is Node.js and what are its main features?",
+    answer: `<strong>Answer:</strong>
+        
+        <p><strong>Node.js</strong> is a JavaScript runtime built on Chrome's V8 engine.</p>
+        
+        <h4>Key Features:</h4>
+        <ul>
+            <li><strong>Asynchronous:</strong> Non-blocking I/O operations</li>
+            <li><strong>Single-threaded:</strong> Event-driven architecture</li>
+            <li><strong>Cross-platform:</strong> Runs on multiple operating systems</li>
+            <li><strong>NPM:</strong> Large package ecosystem</li>
+            <li><strong>Fast:</strong> Built on V8 JavaScript engine</li>
+        </ul>
+        
+        <h4>Basic Server:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+const http = require('http');<br><br>
+
+const server = http.createServer((req, res) => {<br>
+  res.end('Hello World!');<br>
+});<br><br>
+
+server.listen(3000);
+            </code>
+        </div>`,
+  },
+
+  "nodejs-2": {
+    category: "Node.js",
+    level: "Entry",
+    question: "What are Node.js modules and how do you use them?",
+    answer: `<strong>Answer:</strong>
+        
+        <p><strong>Node.js modules</strong> are reusable blocks of code that encapsulate functionality.</p>
+        
+        <h4>Built-in Modules:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+const fs = require('fs');<br>
+const path = require('path');<br>
+const http = require('http');
             </code>
         </div>
         
-        <p><strong>When to use:</strong> Use useState for simple state, useReducer for complex state logic with multiple actions.</p>`,
+        <h4>Custom Modules:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+// math.js<br>
+function add(a, b) {<br>
+  return a + b;<br>
+}<br><br>
+
+module.exports = { add };
+            </code>
+        </div>`,
   },
-  "node-1": {
+
+  "nodejs-3": {
+    category: "Node.js",
+    level: "Intermediate",
+    question: "How does asynchronous programming work in Node.js?",
+    answer: `<strong>Answer:</strong>
+        
+        <p><strong>Asynchronous programming</strong> in Node.js allows non-blocking operations.</p>
+        
+        <h4>Callbacks:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+fs.readFile('file.txt', 'utf8', (err, data) => {<br>
+  if (err) throw err;<br>
+  console.log(data);<br>
+});
+            </code>
+        </div>
+        
+        <h4>Promises:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+fs.readFile('file.txt', 'utf8')<br>
+  .then(data => console.log(data))<br>
+  .catch(err => console.error(err));
+            </code>
+        </div>
+        
+        <h4>Async/Await:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+async function readFile() {<br>
+  try {<br>
+    const data = await fs.readFile('file.txt', 'utf8');<br>
+    console.log(data);<br>
+  } catch (err) {<br>
+    console.error(err);<br>
+  }<br>
+}
+            </code>
+        </div>`,
+  },
+
+  "nodejs-4": {
     category: "Node.js",
     level: "Advanced",
     question: "Explain the Event Loop in Node.js",
     answer: `<strong>Answer:</strong>
         
-        <p>The <strong>Event Loop</strong> is the core mechanism that allows Node.js to perform non-blocking I/O operations despite being single-threaded.</p>
+        <p>The <strong>Event Loop</strong> enables Node.js to perform non-blocking operations.</p>
         
-        <h4>How it Works:</h4>
-        <ol>
-            <li><strong>Call Stack:</strong> Executes synchronous code</li>
-            <li><strong>Callback Queue:</strong> Holds completed async operations</li>
-            <li><strong>Event Loop:</strong> Monitors the call stack and moves callbacks from queue to stack</li>
-        </ol>
-        
-        <h4>Phases of Event Loop:</h4>
+        <h4>Event Loop Phases:</h4>
         <ul>
-            <li><strong>Timer Phase:</strong> Executes setTimeout() and setInterval() callbacks</li>
-            <li><strong>Pending Callbacks:</strong> I/O callbacks deferred to next loop iteration</li>
-            <li><strong>Poll Phase:</strong> Fetches new I/O events and executes callbacks</li>
-            <li><strong>Check Phase:</strong> setImmediate() callbacks are invoked</li>
-            <li><strong>Close Callbacks:</strong> Socket close events</li>
+            <li><strong>Timer Phase:</strong> setTimeout and setInterval callbacks</li>
+            <li><strong>Pending Callbacks:</strong> I/O callbacks</li>
+            <li><strong>Poll Phase:</strong> Fetch new I/O events</li>
+            <li><strong>Check Phase:</strong> setImmediate callbacks</li>
+            <li><strong>Close Callbacks:</strong> Close events</li>
         </ul>
         
+        <h4>Example:</h4>
         <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
             <code>
 console.log('Start');<br>
 setTimeout(() => console.log('Timer'), 0);<br>
 setImmediate(() => console.log('Immediate'));<br>
-console.log('End');<br>
-// Output: Start, End, Immediate, Timer
+console.log('End');
+            </code>
+        </div>`,
+  },
+
+  // HR QUESTIONS
+  "hr-1": {
+    category: "HR",
+    level: "All",
+    question: "Tell me about yourself",
+    answer: `<strong>Answer Structure:</strong>
+        
+        <p>Use the <strong>Present-Past-Future</strong> format:</p>
+        
+        <h4>Present (30 seconds):</h4>
+        <ul>
+            <li>Current role and responsibilities</li>
+            <li>Technologies you work with</li>
+            <li>Key achievements</li>
+        </ul>
+        
+        <h4>Past (30 seconds):</h4>
+        <ul>
+            <li>How you got into development</li>
+            <li>Previous experience</li>
+            <li>Key projects</li>
+        </ul>
+        
+        <h4>Future (30 seconds):</h4>
+        <ul>
+            <li>Why you're interested in this role</li>
+            <li>What you hope to contribute</li>
+            <li>Career goals</li>
+        </ul>`,
+  },
+
+  "hr-2": {
+    category: "HR",
+    level: "All",
+    question: "Why do you want to work here?",
+    answer: `<strong>Answer Strategy:</strong>
+        
+        <p>Show you've researched the company:</p>
+        
+        <h4>Research Areas:</h4>
+        <ul>
+            <li><strong>Company Mission:</strong> How it aligns with your values</li>
+            <li><strong>Products:</strong> What excites you about their work</li>
+            <li><strong>Technology:</strong> Stack matches your interests</li>
+            <li><strong>Culture:</strong> Work environment appeals to you</li>
+            <li><strong>Growth:</strong> Opportunities for development</li>
+        </ul>
+        
+        <h4>Avoid:</h4>
+        <ul>
+            <li>Generic answers</li>
+            <li>Focusing only on salary</li>
+            <li>Saying you need any job</li>
+        </ul>`,
+  },
+
+  "hr-3": {
+    category: "HR",
+    level: "All",
+    question: "What are your strengths and weaknesses?",
+    answer: `<strong>Answer Strategy:</strong>
+        
+        <h4>For Strengths:</h4>
+        <p>Choose 2-3 relevant strengths with specific examples.</p>
+        
+        <h4>For Weaknesses:</h4>
+        <p>Choose a real weakness but show how you're working to improve.</p>
+        
+        <h4>Good Strengths for Developers:</h4>
+        <ul>
+            <li>Problem-solving with examples</li>
+            <li>Continuous learning attitude</li>
+            <li>Attention to detail</li>
+            <li>Team collaboration</li>
+        </ul>
+        
+        <h4>Good Weaknesses (with improvement plans):</h4>
+        <ul>
+            <li>Public speaking (taking courses)</li>
+            <li>Time estimation (using better planning tools)</li>
+            <li>Perfectionism (learning to balance quality with deadlines)</li>
+        </ul>`,
+  },
+
+  // SYSTEM DESIGN
+  "system-1": {
+    category: "System Design",
+    level: "Intermediate",
+    question: "How would you design a URL shortening service?",
+    answer: `<strong>Answer:</strong>
+        
+        <h4>Requirements:</h4>
+        <ul>
+            <li><strong>Functional:</strong> Shorten URLs, redirect, custom aliases</li>
+            <li><strong>Scale:</strong> 100M URLs/month</li>
+            <li><strong>Performance:</strong> Low latency redirects</li>
+        </ul>
+        
+        <h4>Database Schema:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+URLs Table:<br>
+- id (Primary Key)<br>
+- short_url<br>
+- long_url<br>
+- created_at<br>
+- click_count
             </code>
         </div>
         
-        <p><strong>Key Point:</strong> This architecture allows Node.js to handle thousands of concurrent connections efficiently.</p>`,
+        <h4>URL Encoding:</h4>
+        <p>Use Base62 encoding (a-zA-Z0-9) for short URLs</p>
+        
+        <h4>Architecture:</h4>
+        <ul>
+            <li>Load Balancer</li>
+            <li>Web Servers</li>
+            <li>Cache (Redis)</li>
+            <li>Database</li>
+        </ul>`,
+  },
+
+  "system-2": {
+    category: "System Design",
+    level: "Advanced",
+    question: "Design a real-time chat application",
+    answer: `<strong>Answer:</strong>
+        
+        <p>Designing a <strong>real-time chat application</strong> requires handling real-time messaging and scalability.</p>
+        
+        <h4>Requirements:</h4>
+        <ul>
+            <li>Send and receive messages in real-time</li>
+            <li>One-on-one and group conversations</li>
+            <li>User presence (online/offline status)</li>
+            <li>Message history</li>
+        </ul>
+        
+        <h4>Architecture:</h4>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+            <code>
+Client Apps → Load Balancer → WebSocket Servers<br>
+                ↓<br>
+        Message Queue (Kafka)<br>
+                ↓<br>
+        Database + Cache (Redis)
+            </code>
+        </div>
+        
+        <h4>Real-time Communication:</h4>
+        <ul>
+            <li><strong>WebSocket connections</strong> for real-time messaging</li>
+            <li><strong>Message queues</strong> for reliable delivery</li>
+            <li><strong>Caching</strong> for recent messages and user presence</li>
+        </ul>`,
   },
 };
 
+// Question organization
+const questionsByCategory = {
+  mongodb: ["mongodb-1", "mongodb-2", "mongodb-3", "mongodb-4"],
+  express: ["express-1", "express-2", "express-3"],
+  react: ["react-1", "react-2", "react-3", "react-4"],
+  nodejs: ["nodejs-1", "nodejs-2", "nodejs-3", "nodejs-4"],
+  hr: ["hr-1", "hr-2", "hr-3"],
+  system: ["system-1", "system-2"],
+};
+
+const questionsByLevel = {
+  entry: [
+    "mongodb-1",
+    "mongodb-2",
+    "mongodb-3",
+    "express-1",
+    "react-1",
+    "react-2",
+    "nodejs-1",
+    "nodejs-2",
+    "hr-1",
+    "hr-2",
+    "hr-3",
+  ],
+  intermediate: [
+    "mongodb-4",
+    "express-2",
+    "express-3",
+    "react-3",
+    "react-4",
+    "nodejs-3",
+    "system-1",
+  ],
+  senior: ["nodejs-4", "system-2"],
+};
+
+// DOM Elements
+let hamburger, navMenu, modal, modalTitle, modalBody;
+
+// Initialize DOM elements
+function initializeElements() {
+  hamburger = document.getElementById("hamburger");
+  navMenu = document.getElementById("nav-menu");
+  modal = document.getElementById("questionModal");
+  modalTitle = document.getElementById("modalTitle");
+  modalBody = document.getElementById("modalBody");
+}
+
 // Navigation functionality
 function initNavigation() {
-  // Mobile menu toggle
-  hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-  });
+  if (hamburger && navMenu) {
+    hamburger.addEventListener("click", function () {
+      hamburger.classList.toggle("active");
+      navMenu.classList.toggle("active");
+    });
+  }
 
-  // Close mobile menu when clicking on a link
-  document.querySelectorAll(".nav-link").forEach((link) => {
-    link.addEventListener("click", () => {
-      hamburger.classList.remove("active");
-      navMenu.classList.remove("active");
+  // Close mobile menu when clicking nav links
+  const navLinks = document.querySelectorAll(".nav-link");
+  navLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      if (hamburger && navMenu) {
+        hamburger.classList.remove("active");
+        navMenu.classList.remove("active");
+      }
     });
   });
 
-  // Smooth scroll for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  // Smooth scroll
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  anchorLinks.forEach(function (anchor) {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute("href"));
       if (target) {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+        target.scrollIntoView({ behavior: "smooth" });
       }
     });
   });
 }
 
-// Scroll effects
-function initScrollEffects() {
-  const navbar = document.querySelector(".navbar");
+// Show notification
+function showNotification(message, type) {
+  if (!type) type = "info";
 
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 100) {
-      navbar.style.background = "rgba(255, 255, 255, 0.95)";
-      navbar.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
-    } else {
-      navbar.style.background = "rgba(255, 255, 255, 0.95)";
-      navbar.style.boxShadow = "none";
-    }
-  });
-}
-
-// Intersection Observer for animations
-function initAnimations() {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = "1";
-        entry.target.style.transform = "translateY(0)";
-      }
-    });
-  }, observerOptions);
-
-  // Observe elements for animation
-  document
-    .querySelectorAll(".feature-card, .category-card, .level-card")
-    .forEach((el) => {
-      el.style.opacity = "0";
-      el.style.transform = "translateY(30px)";
-      el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-      observer.observe(el);
-    });
-}
-
-// Question functionality
-function openCategory(category) {
-  showNotification(
-    `Loading ${
-      category.charAt(0).toUpperCase() + category.slice(1)
-    } questions...`,
-    "info"
-  );
-
-  // Simulate loading
-  setTimeout(() => {
-    showNotification(
-      `${
-        category.charAt(0).toUpperCase() + category.slice(1)
-      } questions loaded!`,
-      "success"
-    );
-  }, 1000);
-}
-
-function selectLevel(level) {
-  const levelNames = {
-    entry: "Entry Level",
-    intermediate: "Intermediate Level",
-    senior: "Senior Level",
-  };
-
-  showNotification(`Starting ${levelNames[level]} preparation...`, "info");
-
-  // Simulate level selection
-  setTimeout(() => {
-    showNotification(`Welcome to ${levelNames[level]} questions!`, "success");
-  }, 800);
-}
-
-function viewFullAnswer(questionId) {
-  const question = questionsDB[questionId];
-
-  if (question) {
-    modalTitle.textContent = question.question;
-    modalBody.innerHTML = question.answer;
-    modal.style.display = "block";
-    document.body.style.overflow = "hidden";
-  } else {
-    showNotification("Question not found!", "error");
-  }
-}
-
-function closeModal() {
-  modal.style.display = "none";
-  document.body.style.overflow = "auto";
-}
-
-// Hero section functionality
-function startPreparation() {
-  showNotification(
-    "Welcome to StackMaster! Choose a category to begin.",
-    "success"
-  );
-  scrollToSection("questions");
-}
-
-function scrollToSection(sectionId) {
-  const section = document.getElementById(sectionId);
-  if (section) {
-    section.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }
-}
-
-// Notification system
-function showNotification(message, type = "info") {
-  // Create notification element
   const notification = document.createElement("div");
-  notification.className = `notification ${type}`;
-  notification.innerHTML = `
-        <div class="notification-content">
-            <span class="notification-icon">
-                ${type === "success" ? "✓" : type === "error" ? "✗" : "ℹ"}
-            </span>
-            <span class="notification-message">${message}</span>
-            <button class="notification-close" onclick="closeNotification(this)">×</button>
-        </div>
-    `;
+  notification.className = "notification " + type;
+  notification.innerHTML =
+    '<div class="notification-content">' +
+    '<span class="notification-message">' +
+    message +
+    "</span>" +
+    '<button class="notification-close" onclick="closeNotification(this)">×</button>' +
+    "</div>";
 
-  // Add notification styles if not already added
+  // Add styles if not present
   if (!document.querySelector(".notification-styles")) {
     const styles = document.createElement("style");
     styles.className = "notification-styles";
@@ -256,981 +753,357 @@ function showNotification(message, type = "info") {
                 right: 20px;
                 z-index: 3000;
                 background: white;
-                border-radius: 0.5rem;
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-                border-left: 4px solid;
-                animation: slideInRight 0.3s ease-out;
-                max-width: 400px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                border-left: 4px solid #2563eb;
+                animation: slideIn 0.3s ease;
+                max-width: 350px;
             }
-            
-            .notification.info { border-left-color: #2563eb; }
             .notification.success { border-left-color: #10b981; }
             .notification.error { border-left-color: #ef4444; }
-            
             .notification-content {
                 display: flex;
                 align-items: center;
-                gap: 0.75rem;
                 padding: 1rem;
+                gap: 0.75rem;
             }
-            
-            .notification-icon {
-                font-size: 1.25rem;
-                font-weight: bold;
-            }
-            
-            .info .notification-icon { color: #2563eb; }
-            .success .notification-icon { color: #10b981; }
-            .error .notification-icon { color: #ef4444; }
-            
             .notification-message {
                 flex: 1;
-                font-weight: 500;
                 color: #1e293b;
+                font-weight: 500;
             }
-            
             .notification-close {
                 background: none;
                 border: none;
-                font-size: 1.25rem;
+                font-size: 1.2rem;
                 cursor: pointer;
                 color: #64748b;
                 padding: 0;
-                width: 20px;
-                height: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
             }
-            
-            .notification-close:hover {
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            .questions-container, .questions-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+            .question-card {
+                background: #f8fafc;
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                padding: 1.5rem;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+            .question-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                border-color: #2563eb;
+            }
+            .question-card h4, .question-card h5 {
                 color: #1e293b;
+                margin: 0.5rem 0 1rem 0;
+                font-size: 1.1rem;
+                line-height: 1.4;
             }
-            
-            @keyframes slideInRight {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
+            .question-level {
+                display: inline-block;
+                padding: 0.25rem 0.75rem;
+                border-radius: 1rem;
+                font-size: 0.75rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                background: #dbeafe;
+                color: #1d4ed8;
             }
-            
-            @keyframes slideOutRight {
-                from {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
+            .question-level.entry { background: #dcfce7; color: #166534; }
+            .question-level.intermediate { background: #dbeafe; color: #1d4ed8; }
+            .question-level.advanced, .question-level.senior { background: #faf5ff; color: #7c3aed; }
+            .question-level.all { background: #f1f5f9; color: #475569; }
+            .category-section {
+                margin: 2rem 0;
+                padding: 1rem 0;
+                border-top: 1px solid #e2e8f0;
             }
-            
-            @media (max-width: 480px) {
-                .notification {
-                    right: 10px;
-                    left: 10px;
-                    max-width: none;
-                }
+            .category-title {
+                color: #1e293b;
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+            .question-detail .question-meta {
+                display: flex;
+                gap: 1rem;
+                margin-bottom: 1rem;
+                flex-wrap: wrap;
+            }
+            .question-category {
+                padding: 0.25rem 0.75rem;
+                border-radius: 1rem;
+                font-size: 0.75rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: white;
+                background: #2563eb;
+            }
+            .question-title {
+                color: #1e293b;
+                font-size: 1.4rem;
+                font-weight: 600;
+                line-height: 1.3;
+                margin-bottom: 1.5rem;
+            }
+            .question-answer {
+                line-height: 1.6;
+                color: #374151;
+            }
+            .question-answer h4, .question-answer h5 {
+                color: #1e293b;
+                margin-top: 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+            .question-answer ul {
+                margin: 1rem 0;
+                padding-left: 1.5rem;
+            }
+            .question-answer li {
+                margin-bottom: 0.5rem;
+            }
+            .question-actions {
+                margin-top: 2rem;
+                padding-top: 1.5rem;
+                border-top: 1px solid #e2e8f0;
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
             }
         `;
     document.head.appendChild(styles);
   }
 
-  // Add to page
   document.body.appendChild(notification);
 
   // Auto remove after 5 seconds
-  setTimeout(() => {
+  setTimeout(function () {
     if (notification.parentNode) {
       closeNotification(notification.querySelector(".notification-close"));
     }
   }, 5000);
 }
 
+// Close notification
 function closeNotification(closeBtn) {
   const notification = closeBtn.closest(".notification");
-  notification.style.animation = "slideOutRight 0.3s ease-out";
-  setTimeout(() => {
-    if (notification.parentNode) {
-      notification.remove();
-    }
-  }, 300);
-}
-
-// Search functionality
-function initSearch() {
-  // Create search functionality
-  const searchHTML = `
-        <div class="search-container">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Search questions, topics, or keywords...">
-                <button class="search-clear" id="searchClear">×</button>
-            </div>
-            <div class="search-results" id="searchResults"></div>
-        </div>
-    `;
-
-  // Add search to questions section
-  const questionsSection = document.getElementById("questions");
-  if (questionsSection) {
-    const searchDiv = document.createElement("div");
-    searchDiv.innerHTML = searchHTML;
-    questionsSection.appendChild(searchDiv);
-
-    // Add search styles
-    const searchStyles = document.createElement("style");
-    searchStyles.textContent = `
-            .search-container {
-                max-width: 600px;
-                margin: 2rem auto;
-                position: relative;
-            }
-            
-            .search-box {
-                position: relative;
-                display: flex;
-                align-items: center;
-                background: white;
-                border: 2px solid var(--border-color);
-                border-radius: 0.5rem;
-                padding: 0.75rem;
-                transition: var(--transition);
-            }
-            
-            .search-box:focus-within {
-                border-color: var(--primary-color);
-                box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-            }
-            
-            .search-box i {
-                color: var(--text-secondary);
-                margin-right: 0.75rem;
-            }
-            
-            .search-box input {
-                flex: 1;
-                border: none;
-                outline: none;
-                font-size: 1rem;
-                color: var(--text-primary);
-            }
-            
-            .search-clear {
-                background: none;
-                border: none;
-                font-size: 1.25rem;
-                color: var(--text-secondary);
-                cursor: pointer;
-                padding: 0;
-                margin-left: 0.5rem;
-                display: none;
-            }
-            
-            .search-clear:hover {
-                color: var(--text-primary);
-            }
-            
-            .search-results {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                border: 1px solid var(--border-color);
-                border-radius: 0.5rem;
-                box-shadow: var(--shadow);
-                display: none;
-                max-height: 300px;
-                overflow-y: auto;
-                z-index: 1000;
-            }
-        `;
-    document.head.appendChild(searchStyles);
-
-    // Initialize search functionality
-    const searchInput = document.getElementById("searchInput");
-    const searchClear = document.getElementById("searchClear");
-    const searchResults = document.getElementById("searchResults");
-
-    searchInput.addEventListener("input", (e) => {
-      const query = e.target.value;
-      if (query.length > 0) {
-        searchClear.style.display = "block";
-        // Simulate search results
-        searchResults.innerHTML = `
-                    <div style="padding: 1rem;">
-                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">Searching for "${query}"...</p>
-                        <div style="height: 2px; background: var(--border-color); border-radius: 1px;">
-                            <div style="width: 50%; height: 100%; background: var(--primary-color); border-radius: 1px; animation: pulse 1s infinite;"></div>
-                        </div>
-                    </div>
-                `;
-        searchResults.style.display = "block";
-      } else {
-        searchClear.style.display = "none";
-        searchResults.style.display = "none";
-      }
-    });
-
-    searchClear.addEventListener("click", () => {
-      searchInput.value = "";
-      searchClear.style.display = "none";
-      searchResults.style.display = "none";
-    });
+  if (notification && notification.parentNode) {
+    notification.remove();
   }
 }
 
-// Progress tracking
-function initProgressTracking() {
-  const progress = {
-    mongodb: 0,
-    express: 0,
-    react: 0,
-    nodejs: 0,
-    hr: 0,
-    system: 0,
+// Open category questions
+function openCategory(category) {
+  const categoryQuestions = questionsByCategory[category];
+
+  if (!categoryQuestions || categoryQuestions.length === 0) {
+    showNotification("No questions available for " + category, "info");
+    return;
+  }
+
+  let html = '<div class="question-modal-styles">';
+  html +=
+    "<h3>" +
+    category.charAt(0).toUpperCase() +
+    category.slice(1) +
+    " Questions</h3>";
+  html += '<div class="questions-container">';
+
+  for (let i = 0; i < categoryQuestions.length; i++) {
+    const questionId = categoryQuestions[i];
+    const question = questionsDB[questionId];
+    if (question) {
+      html +=
+        '<div class="question-card" onclick="viewFullAnswer(\'' +
+        questionId +
+        "')\">";
+      html += '<div class="question-header">';
+      html +=
+        '<span class="question-level ' +
+        question.level.toLowerCase() +
+        '">' +
+        question.level +
+        "</span>";
+      html += "</div>";
+      html += "<h4>" + question.question + "</h4>";
+      html += '<div class="question-actions">';
+      html += '<button class="btn btn-small btn-primary">View Answer</button>';
+      html += "</div>";
+      html += "</div>";
+    }
+  }
+
+  html += "</div></div>";
+
+  if (modalTitle && modalBody && modal) {
+    modalTitle.textContent =
+      category.charAt(0).toUpperCase() + category.slice(1) + " Questions";
+    modalBody.innerHTML = html;
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden";
+  }
+}
+
+// Select level questions
+function selectLevel(level) {
+  const levelQuestions = questionsByLevel[level];
+
+  if (!levelQuestions || levelQuestions.length === 0) {
+    showNotification("No questions available for " + level + " level", "info");
+    return;
+  }
+
+  const levelNames = {
+    entry: "Entry Level",
+    intermediate: "Intermediate Level",
+    senior: "Senior Level",
   };
 
-  // Save progress to localStorage (note: this won't work in Claude artifacts)
-  function saveProgress() {
-    try {
-      localStorage.setItem("StackMaster_progress", JSON.stringify(progress));
-    } catch (e) {
-      // Fallback for environments without localStorage
-      console.log("Progress saved (in memory):", progress);
+  let html = '<div class="question-modal-styles">';
+  html += "<h3>" + levelNames[level] + " Questions</h3>";
+  html += '<div class="questions-container">';
+
+  for (let i = 0; i < levelQuestions.length; i++) {
+    const questionId = levelQuestions[i];
+    const question = questionsDB[questionId];
+    if (question) {
+      html +=
+        '<div class="question-card" onclick="viewFullAnswer(\'' +
+        questionId +
+        "')\">";
+      html += '<div class="question-header">';
+      html +=
+        '<span class="question-level ' +
+        question.level.toLowerCase() +
+        '">' +
+        question.level +
+        "</span>";
+      html += "</div>";
+      html += "<h4>" + question.question + "</h4>";
+      html += '<div class="question-actions">';
+      html += '<button class="btn btn-small btn-primary">View Answer</button>';
+      html += "</div>";
+      html += "</div>";
     }
   }
 
-  // Load progress from localStorage
-  function loadProgress() {
-    try {
-      const saved = localStorage.getItem("StackMaster_progress");
-      if (saved) {
-        Object.assign(progress, JSON.parse(saved));
-      }
-    } catch (e) {
-      // Fallback for environments without localStorage
-      console.log("Using default progress");
-    }
-    updateProgressDisplay();
-  }
+  html += "</div></div>";
 
-  function updateProgressDisplay() {
-    // Update progress indicators (if they exist)
-    Object.keys(progress).forEach((category) => {
-      const indicator = document.querySelector(`.progress-${category}`);
-      if (indicator) {
-        indicator.style.width = `${progress[category]}%`;
-      }
-    });
-  }
-
-  // Initialize progress tracking
-  loadProgress();
-
-  return { progress, saveProgress, updateProgressDisplay };
-}
-
-// Keyboard shortcuts
-function initKeyboardShortcuts() {
-  document.addEventListener("keydown", (e) => {
-    // ESC to close modal
-    if (e.key === "Escape" && modal.style.display === "block") {
-      closeModal();
-    }
-
-    // Ctrl+K to focus search (if exists)
-    if ((e.ctrlKey || e.metaKey) && e.key === "k") {
-      e.preventDefault();
-      const searchInput = document.getElementById("searchInput");
-      if (searchInput) {
-        searchInput.focus();
-      }
-    }
-  });
-}
-
-// Theme toggle (bonus feature)
-function initThemeToggle() {
-  const themeToggle = document.createElement("button");
-  themeToggle.className = "theme-toggle";
-  themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-  themeToggle.setAttribute("aria-label", "Toggle dark mode");
-
-  // Add theme toggle to navbar
-  const navContainer = document.querySelector(".nav-container");
-  if (navContainer) {
-    navContainer.appendChild(themeToggle);
-  }
-
-  // Add theme toggle styles
-  const themeStyles = document.createElement("style");
-  themeStyles.textContent = `
-        .theme-toggle {
-            background: none;
-            border: 2px solid var(--border-color);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--text-primary);
-            margin-left: 1rem;
-        }
-        
-        .theme-toggle:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-        
-        @media (max-width: 768px) {
-            .theme-toggle {
-                order: -1;
-                margin-left: 0;
-                margin-right: 1rem;
-            }
-        }
-    `;
-  document.head.appendChild(themeStyles);
-
-  themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark-theme");
-    const isDark = document.body.classList.contains("dark-theme");
-    themeToggle.innerHTML = isDark
-      ? '<i class="fas fa-sun"></i>'
-      : '<i class="fas fa-moon"></i>';
-
-    // Save theme preference
-    try {
-      localStorage.setItem("StackMaster_theme", isDark ? "dark" : "light");
-    } catch (e) {
-      console.log("Theme preference saved in memory");
-    }
-  });
-
-  // Load saved theme
-  try {
-    const savedTheme = localStorage.getItem("StackMaster_theme");
-    if (savedTheme === "dark") {
-      document.body.classList.add("dark-theme");
-      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
-  } catch (e) {
-    console.log("Using default theme");
+  if (modalTitle && modalBody && modal) {
+    modalTitle.textContent = levelNames[level];
+    modalBody.innerHTML = html;
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden";
   }
 }
 
-// Initialize everything when DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
+// View full answer
+function viewFullAnswer(questionId) {
+  const question = questionsDB[questionId];
+
+  if (question) {
+    let html = '<div class="question-detail">';
+    html += '<div class="question-meta">';
+    html += '<span class="question-category">' + question.category + "</span>";
+    html +=
+      '<span class="question-level ' +
+      question.level.toLowerCase() +
+      '">' +
+      question.level +
+      "</span>";
+    html += "</div>";
+    html += '<h3 class="question-title">' + question.question + "</h3>";
+    html += '<div class="question-answer">' + question.answer + "</div>";
+    html += '<div class="question-actions">';
+    html +=
+      '<button class="btn btn-secondary" onclick="goBackToList()">← Back to Questions</button>';
+    html += "</div>";
+    html += "</div>";
+
+    if (modalTitle && modalBody) {
+      modalTitle.textContent = "Question Details";
+      modalBody.innerHTML = html;
+    }
+  } else {
+    showNotification("Question not found!", "error");
+  }
+}
+
+// Go back to list
+function goBackToList() {
+  closeModal();
+  showNotification(
+    "Use the category or level buttons to browse more questions!",
+    "info"
+  );
+}
+
+// Close modal
+function closeModal() {
+  if (modal) {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+}
+
+// Start preparation
+function startPreparation() {
+  showNotification(
+    "Welcome to StackMaster! Choose a category or level to begin.",
+    "success"
+  );
+  const questionsSection = document.getElementById("questions");
+  if (questionsSection) {
+    questionsSection.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+// Scroll to section
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+// Initialize everything
+document.addEventListener("DOMContentLoaded", function () {
+  initializeElements();
   initNavigation();
-  initScrollEffects();
-  initAnimations();
-  initSearch();
-  initProgressTracking();
-  initKeyboardShortcuts();
-  initThemeToggle();
 
   // Welcome message
-  setTimeout(() => {
+  setTimeout(function () {
     showNotification(
-      "Welcome to StackMaster! Your journey to MERN stack mastery begins here.",
+      "Welcome to StackMaster! Click any category or level to start learning.",
       "success"
     );
   }, 1000);
 });
 
 // Close modal when clicking outside
-window.addEventListener("click", (e) => {
+window.addEventListener("click", function (e) {
   if (e.target === modal) {
     closeModal();
   }
 });
 
-// Service Worker registration (for PWA functionality)
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("/sw.js")
-      .then((registration) => {
-        console.log("SW registered: ", registration);
-      })
-      .catch((registrationError) => {
-        console.log("SW registration failed: ", registrationError);
-      });
-  });
-}
-
-// Advanced question filtering
-function filterQuestions(category, level, searchTerm = "") {
-  const allQuestions = [
-    // MongoDB Questions
-    {
-      id: "mongo-1",
-      category: "MongoDB",
-      level: "Entry",
-      question: "What is MongoDB?",
-      tags: ["database", "nosql"],
-    },
-    {
-      id: "mongo-2",
-      category: "MongoDB",
-      level: "Intermediate",
-      question: "Explain MongoDB indexing",
-      tags: ["performance", "indexing"],
-    },
-    {
-      id: "mongo-3",
-      category: "MongoDB",
-      level: "Advanced",
-      question: "MongoDB sharding strategy",
-      tags: ["scaling", "architecture"],
-    },
-
-    // Express Questions
-    {
-      id: "express-1",
-      category: "Express",
-      level: "Entry",
-      question: "What is Express.js middleware?",
-      tags: ["middleware", "routing"],
-    },
-    {
-      id: "express-2",
-      category: "Express",
-      level: "Intermediate",
-      question: "JWT authentication in Express",
-      tags: ["auth", "security"],
-    },
-    {
-      id: "express-3",
-      category: "Express",
-      level: "Advanced",
-      question: "Express error handling patterns",
-      tags: ["error-handling", "best-practices"],
-    },
-
-    // React Questions
-    {
-      id: "react-1",
-      category: "React",
-      level: "Intermediate",
-      question: "useState vs useReducer",
-      tags: ["hooks", "state"],
-    },
-    {
-      id: "react-2",
-      category: "React",
-      level: "Entry",
-      question: "What are React components?",
-      tags: ["components", "jsx"],
-    },
-    {
-      id: "react-3",
-      category: "React",
-      level: "Advanced",
-      question: "React performance optimization",
-      tags: ["performance", "optimization"],
-    },
-
-    // Node.js Questions
-    {
-      id: "node-1",
-      category: "Node.js",
-      level: "Advanced",
-      question: "Event Loop explanation",
-      tags: ["event-loop", "async"],
-    },
-    {
-      id: "node-2",
-      category: "Node.js",
-      level: "Entry",
-      question: "What is Node.js?",
-      tags: ["runtime", "javascript"],
-    },
-    {
-      id: "node-3",
-      category: "Node.js",
-      level: "Intermediate",
-      question: "Node.js streams",
-      tags: ["streams", "data"],
-    },
-
-    // HR Questions
-    {
-      id: "hr-1",
-      category: "HR",
-      level: "All",
-      question: "Tell me about yourself",
-      tags: ["introduction", "behavioral"],
-    },
-    {
-      id: "hr-2",
-      category: "HR",
-      level: "All",
-      question: "Why do you want this job?",
-      tags: ["motivation", "career"],
-    },
-    {
-      id: "hr-3",
-      category: "HR",
-      level: "All",
-      question: "Describe a challenging project",
-      tags: ["problem-solving", "experience"],
-    },
-  ];
-
-  return allQuestions.filter((q) => {
-    const matchesCategory =
-      !category || q.category.toLowerCase() === category.toLowerCase();
-    const matchesLevel =
-      !level ||
-      q.level.toLowerCase() === level.toLowerCase() ||
-      q.level === "All";
-    const matchesSearch =
-      !searchTerm ||
-      q.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      q.tags.some((tag) =>
-        tag.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-
-    return matchesCategory && matchesLevel && matchesSearch;
-  });
-}
-
-// Quiz functionality
-function startQuiz(category, level) {
-  const questions = filterQuestions(category, level);
-  if (questions.length === 0) {
-    showNotification("No questions found for the selected criteria.", "error");
-    return;
+// Keyboard shortcuts
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && modal && modal.style.display === "block") {
+    closeModal();
   }
+});
 
-  const quizData = {
-    questions: questions.slice(0, 10), // Limit to 10 questions
-    currentQuestion: 0,
-    score: 0,
-    userAnswers: [],
-  };
-
-  showQuizModal(quizData);
-}
-
-function showQuizModal(quizData) {
-  const quizHTML = `
-        <div class="quiz-container">
-            <div class="quiz-header">
-                <div class="quiz-progress">
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${
-                          (quizData.currentQuestion /
-                            quizData.questions.length) *
-                          100
-                        }%"></div>
-                    </div>
-                    <span class="progress-text">${
-                      quizData.currentQuestion + 1
-                    } / ${quizData.questions.length}</span>
-                </div>
-                <div class="quiz-score">Score: ${quizData.score}</div>
-            </div>
-            
-            <div class="quiz-question">
-                <h3>${
-                  quizData.questions[quizData.currentQuestion].question
-                }</h3>
-                <div class="quiz-options">
-                    <button class="quiz-option" onclick="selectQuizAnswer(0)">Option A</button>
-                    <button class="quiz-option" onclick="selectQuizAnswer(1)">Option B</button>
-                    <button class="quiz-option" onclick="selectQuizAnswer(2)">Option C</button>
-                    <button class="quiz-option" onclick="selectQuizAnswer(3)">Option D</button>
-                </div>
-            </div>
-            
-            <div class="quiz-actions">
-                <button class="btn btn-secondary" onclick="closeModal()">Exit Quiz</button>
-                <button class="btn btn-primary" id="nextQuizBtn" onclick="nextQuizQuestion()" disabled>Next</button>
-            </div>
-        </div>
-    `;
-
-  modalTitle.textContent = "MERN Stack Quiz";
-  modalBody.innerHTML = quizHTML;
-  modal.style.display = "block";
-
-  // Store quiz data globally for access
-  window.currentQuiz = quizData;
-}
-
-function selectQuizAnswer(optionIndex) {
-  const options = document.querySelectorAll(".quiz-option");
-  options.forEach((option, index) => {
-    option.classList.remove("selected");
-    if (index === optionIndex) {
-      option.classList.add("selected");
-    }
-  });
-
-  document.getElementById("nextQuizBtn").disabled = false;
-  window.currentQuiz.userAnswers[window.currentQuiz.currentQuestion] =
-    optionIndex;
-}
-
-function nextQuizQuestion() {
-  window.currentQuiz.currentQuestion++;
-
-  if (
-    window.currentQuiz.currentQuestion >= window.currentQuiz.questions.length
-  ) {
-    showQuizResults();
-  } else {
-    showQuizModal(window.currentQuiz);
-  }
-}
-
-function showQuizResults() {
-  const score = Math.floor(Math.random() * 30) + 70; // Simulate score
-  const resultHTML = `
-        <div class="quiz-results">
-            <div class="result-score">
-                <h2>Quiz Complete!</h2>
-                <div class="score-circle">
-                    <span class="score-number">${score}%</span>
-                </div>
-                <p class="score-message">
-                    ${
-                      score >= 80
-                        ? "Excellent work!"
-                        : score >= 60
-                        ? "Good job!"
-                        : "Keep practicing!"
-                    }
-                </p>
-            </div>
-            
-            <div class="result-breakdown">
-                <h3>Performance Breakdown</h3>
-                <div class="breakdown-item">
-                    <span>Correct Answers:</span>
-                    <span>${Math.floor(score / 10)}/10</span>
-                </div>
-                <div class="breakdown-item">
-                    <span>Time Taken:</span>
-                    <span>5:32</span>
-                </div>
-                <div class="breakdown-item">
-                    <span>Category:</span>
-                    <span>${window.currentQuiz.questions[0].category}</span>
-                </div>
-            </div>
-            
-            <div class="result-actions">
-                <button class="btn btn-primary" onclick="restartQuiz()">Retake Quiz</button>
-                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
-            </div>
-        </div>
-    `;
-
-  modalBody.innerHTML = resultHTML;
-
-  // Add celebration animation
-  setTimeout(() => {
-    if (score >= 80) {
-      showNotification(
-        "🎉 Excellent score! You're ready for interviews!",
-        "success"
-      );
-    }
-  }, 500);
-}
-
-function restartQuiz() {
-  if (window.currentQuiz) {
-    window.currentQuiz.currentQuestion = 0;
-    window.currentQuiz.score = 0;
-    window.currentQuiz.userAnswers = [];
-    showQuizModal(window.currentQuiz);
-  }
-}
-
-// Study plan generator
-function generateStudyPlan(level, timeframe) {
-  const studyPlans = {
-    entry: {
-      "1week": [
-        "Day 1-2: JavaScript fundamentals & ES6+",
-        "Day 3: Node.js basics & npm",
-        "Day 4: Express.js routing & middleware",
-        "Day 5: MongoDB basics & Mongoose",
-        "Day 6: React components & JSX",
-        "Day 7: Practice projects & review",
-      ],
-      "2weeks": [
-        "Week 1: JavaScript, Node.js, Express basics",
-        "Week 2: MongoDB, React fundamentals, mini-projects",
-      ],
-      "1month": [
-        "Week 1: JavaScript mastery & Node.js",
-        "Week 2: Express.js & REST APIs",
-        "Week 3: MongoDB & database design",
-        "Week 4: React & frontend development",
-      ],
-    },
-    intermediate: {
-      "1week": [
-        "Day 1: Advanced JavaScript concepts",
-        "Day 2: Node.js advanced features",
-        "Day 3: Express.js security & optimization",
-        "Day 4: MongoDB aggregation & indexing",
-        "Day 5: React hooks & context",
-        "Day 6: Testing & deployment",
-        "Day 7: System design basics",
-      ],
-    },
-    senior: {
-      "1week": [
-        "Day 1: Architecture patterns",
-        "Day 2: Microservices & scalability",
-        "Day 3: Advanced database optimization",
-        "Day 4: Performance monitoring",
-        "Day 5: System design interviews",
-        "Day 6: Leadership scenarios",
-        "Day 7: Mock interviews",
-      ],
-    },
-  };
-
-  const plan = studyPlans[level] && studyPlans[level][timeframe];
-  if (!plan) {
-    showNotification(
-      "Study plan not available for selected criteria.",
-      "error"
-    );
-    return;
-  }
-
-  const planHTML = `
-        <div class="study-plan">
-            <h3>Your ${timeframe.replace(
-              /(\d+)/,
-              "$1 "
-            )} Study Plan (${level} Level)</h3>
-            <div class="plan-timeline">
-                ${plan
-                  .map(
-                    (item, index) => `
-                    <div class="timeline-item">
-                        <div class="timeline-marker">${index + 1}</div>
-                        <div class="timeline-content">
-                            <p>${item}</p>
-                            <div class="timeline-actions">
-                                <button class="btn btn-small" onclick="markCompleted(${index})">Mark Complete</button>
-                            </div>
-                        </div>
-                    </div>
-                `
-                  )
-                  .join("")}
-            </div>
-            <div class="plan-actions">
-                <button class="btn btn-primary" onclick="downloadPlan()">Download Plan</button>
-                <button class="btn btn-secondary" onclick="customizePlan()">Customize</button>
-            </div>
-        </div>
-    `;
-
-  modalTitle.textContent = "Personalized Study Plan";
-  modalBody.innerHTML = planHTML;
-  modal.style.display = "block";
-}
-
-function markCompleted(itemIndex) {
-  const timelineItem = document.querySelectorAll(".timeline-item")[itemIndex];
-  timelineItem.classList.add("completed");
-  showNotification("Great job! Keep up the momentum!", "success");
-}
-
-function downloadPlan() {
-  showNotification("Study plan download feature coming soon!", "info");
-}
-
-function customizePlan() {
-  showNotification("Plan customization feature coming soon!", "info");
-}
-
-// Interview simulator
-function startInterviewSimulator(type) {
-  const simulatorHTML = `
-        <div class="interview-simulator">
-            <div class="simulator-header">
-                <h3>${type} Interview Simulation</h3>
-                <div class="timer">00:00</div>
-            </div>
-            
-            <div class="simulator-question">
-                <p class="question-prompt">The interviewer is asking:</p>
-                <h4 id="currentInterviewQuestion">Loading question...</h4>
-            </div>
-            
-            <div class="simulator-controls">
-                <button class="btn btn-primary" onclick="startRecording()">
-                    <i class="fas fa-microphone"></i> Start Answer
-                </button>
-                <button class="btn btn-secondary" onclick="nextInterviewQuestion()">
-                    Skip Question
-                </button>
-                <button class="btn btn-outline" onclick="endInterview()">
-                    End Interview
-                </button>
-            </div>
-            
-            <div class="simulator-feedback" id="simulatorFeedback">
-                <h4>Tips for this question:</h4>
-                <ul id="questionTips"></ul>
-            </div>
-        </div>
-    `;
-
-  modalTitle.textContent = "Interview Simulator";
-  modalBody.innerHTML = simulatorHTML;
-  modal.style.display = "block";
-
-  loadInterviewQuestion(type);
-  startInterviewTimer();
-}
-
-function loadInterviewQuestion(type) {
-  const questions = {
-    technical: [
-      "Explain the difference between SQL and NoSQL databases.",
-      "How does React's virtual DOM work?",
-      "What are the benefits of using middleware in Express?",
-      "Describe the event loop in Node.js.",
-    ],
-    behavioral: [
-      "Tell me about a time you had to work with a difficult team member.",
-      "Describe a project you're particularly proud of.",
-      "How do you handle tight deadlines?",
-      "What motivates you as a developer?",
-    ],
-    "system-design": [
-      "Design a URL shortening service like bit.ly",
-      "How would you design a chat application?",
-      "Explain how you would scale a web application.",
-      "Design a notification system for a social media app.",
-    ],
-  };
-
-  const questionList = questions[type] || questions["technical"];
-  const randomQuestion =
-    questionList[Math.floor(Math.random() * questionList.length)];
-
-  document.getElementById("currentInterviewQuestion").textContent =
-    randomQuestion;
-
-  // Load tips for the question
-  const tips = [
-    "Structure your answer with a clear beginning, middle, and end",
-    "Use specific examples from your experience",
-    "Don't be afraid to ask clarifying questions",
-    "Think out loud to show your problem-solving process",
-  ];
-
-  const tipsElement = document.getElementById("questionTips");
-  tipsElement.innerHTML = tips.map((tip) => `<li>${tip}</li>`).join("");
-}
-
-function startRecording() {
-  showNotification("Recording started! Speak your answer clearly.", "info");
-  // Simulate recording functionality
-  setTimeout(() => {
-    showNotification("Recording stopped. Great answer!", "success");
-  }, 5000);
-}
-
-function nextInterviewQuestion() {
-  loadInterviewQuestion("technical"); // Default to technical for demo
-  showNotification("Next question loaded!", "info");
-}
-
-function endInterview() {
-  const feedbackHTML = `
-        <div class="interview-results">
-            <h3>Interview Complete!</h3>
-            <div class="performance-metrics">
-                <div class="metric">
-                    <span class="metric-label">Questions Answered:</span>
-                    <span class="metric-value">5/7</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">Total Time:</span>
-                    <span class="metric-value">23:45</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">Confidence Level:</span>
-                    <span class="metric-value">85%</span>
-                </div>
-            </div>
-            
-            <div class="feedback-section">
-                <h4>Areas of Strength:</h4>
-                <ul>
-                    <li>Clear communication</li>
-                    <li>Good technical knowledge</li>
-                    <li>Structured thinking</li>
-                </ul>
-                
-                <h4>Areas for Improvement:</h4>
-                <ul>
-                    <li>Practice more system design questions</li>
-                    <li>Work on concise explanations</li>
-                    <li>Prepare more specific examples</li>
-                </ul>
-            </div>
-            
-            <div class="next-steps">
-                <button class="btn btn-primary" onclick="scheduleFollowup()">Schedule Follow-up</button>
-                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
-            </div>
-        </div>
-    `;
-
-  modalBody.innerHTML = feedbackHTML;
-  showNotification(
-    "Interview simulation complete! Check your feedback.",
-    "success"
-  );
-}
-
-function startInterviewTimer() {
-  let seconds = 0;
-  const timer = document.querySelector(".timer");
-
-  const interval = setInterval(() => {
-    seconds++;
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    timer.textContent = `${mins.toString().padStart(2, "0")}:${secs
-      .toString()
-      .padStart(2, "0")}`;
-  }, 1000);
-
-  // Store interval to clear later
-  window.interviewTimer = interval;
-}
-
-function scheduleFollowup() {
-  showNotification("Follow-up scheduling feature coming soon!", "info");
-}
-
-// Export functions for global access
+// Make functions globally available
 window.openCategory = openCategory;
 window.selectLevel = selectLevel;
 window.viewFullAnswer = viewFullAnswer;
@@ -1238,55 +1111,6 @@ window.closeModal = closeModal;
 window.startPreparation = startPreparation;
 window.scrollToSection = scrollToSection;
 window.closeNotification = closeNotification;
-window.startQuiz = startQuiz;
-window.generateStudyPlan = generateStudyPlan;
-window.startInterviewSimulator = startInterviewSimulator;
+window.goBackToList = goBackToList;
 
-// Additional utility functions
-function copyToClipboard(text) {
-  navigator.clipboard
-    .writeText(text)
-    .then(() => {
-      showNotification("Copied to clipboard!", "success");
-    })
-    .catch(() => {
-      showNotification("Failed to copy to clipboard", "error");
-    });
-}
-
-function shareQuestion(questionId) {
-  const url = `${window.location.origin}#question=${questionId}`;
-  copyToClipboard(url);
-}
-
-// Performance monitoring
-function trackUserInteraction(action, category) {
-  // Analytics tracking would go here
-  console.log(`User action: ${action} in ${category}`);
-}
-
-// Accessibility improvements
-function enhanceAccessibility() {
-  // Add ARIA labels and keyboard navigation
-  document
-    .querySelectorAll(".category-card, .level-card")
-    .forEach((card, index) => {
-      card.setAttribute("tabindex", "0");
-      card.setAttribute("role", "button");
-      card.addEventListener("keypress", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          card.click();
-        }
-      });
-    });
-}
-
-// Initialize accessibility enhancements
-document.addEventListener("DOMContentLoaded", () => {
-  enhanceAccessibility();
-});
-
-console.log(
-  "🚀 StackMaster loaded successfully! Welcome to your interview preparation journey."
-);
+console.log("StackMaster loaded successfully!");
